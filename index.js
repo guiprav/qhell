@@ -27,6 +27,8 @@ Qh.deepWhen = x => {
         x = Array.from(x);
     }
 
+    // TODO: This can be made much more efficient if we avoid
+    // calling Q.when / Q.all on non-promises.
     return Q.when(x).then(x => {
         if(Array.isArray(x)) {
             let nx = [];
