@@ -2,6 +2,8 @@
 
 Helpers for treating promises more like the values they resolve to.
 
+[Even a bunch of poor-man tests](test.js) can be worth a thousand words.
+
 ## License
 
 ![](https://www.gnu.org/graphics/agplv3-155x51.png)
