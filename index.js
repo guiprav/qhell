@@ -107,6 +107,12 @@ Qh.or = function() {
     });
 };
 
+Qh.ifElse = (x, tFn, fFn) => {
+    return Q.when(x).then(x => {
+        return x? tFn() : fFn();
+    });
+};
+
 {
     let binaryOps = {
         '+': (a, b) => a + b,

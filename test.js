@@ -51,3 +51,17 @@ Qh.console.log('11 - false:', Qh.or(0, 0, 0));
 // ---
 
 Qh.console.log('12 - 24:', Qh.mult(2, Q.when(3), 4));
+
+// ---
+
+Qh.ifElse(
+    Q.when(true),
+        () => console.log('13 - ok'),
+        () => console.log('13 - error')
+);
+
+Qh.ifElse(
+    Q.when(false),
+        () => console.log('13 - error'),
+        () => console.log('13 - ok')
+);
