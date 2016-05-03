@@ -22,7 +22,7 @@ Qh.console.log(Qh.mult(2, Q.when(3), Q.when(4)));
 
 // Output: Bar
 Qh.ifElse(
-    Qh.and(1, 2, 0, 3),
+    Qh.and(1, 2, Q.when(0), Q.when(3)),
         () => console.log('Foo'),
         () => console.log('Bar')
 );
