@@ -4,6 +4,27 @@ Helpers for treating promises more like the values they resolve to.
 
 [Even a bunch of poor-man tests](test.js) can be worth a thousand words.
 
+## Installation
+
+    npm install --save qhell
+
+## Examples
+
+    let Qh = require('qhell');
+    let Q = require('q');
+
+    // Output: 1 2 [ 3, 4, { a: 5, b: 6 } ]
+    Qh.console.log(1, 2, [3, Q.when(4), { a: 5, b: Q.when(6) }]);
+
+    // Output: 24
+    Qh.console.log(Qh.mult(2, Q.when(3), Q.when(4)));
+
+    // Output: Bar
+    Qh.ifElse(Qh.and(1, 2, 0, 3)).then(
+        () => console.log('Foo'),
+        () => console.log('Bar')
+    );
+
 ## License
 
 ![](https://www.gnu.org/graphics/agplv3-155x51.png)
