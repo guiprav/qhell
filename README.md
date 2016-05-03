@@ -10,20 +10,22 @@ Helpers for treating promises more like the values they resolve to.
 
 ## Examples
 
-    let Qh = require('qhell');
-    let Q = require('q');
+```js
+let Qh = require('qhell');
+let Q = require('q');
 
-    // Output: 1 2 [ 3, 4, { a: 5, b: 6 } ]
-    Qh.console.log(1, 2, [3, Q.when(4), { a: 5, b: Q.when(6) }]);
+// Output: 1 2 [ 3, 4, { a: 5, b: 6 } ]
+Qh.console.log(1, 2, [3, Q.when(4), { a: 5, b: Q.when(6) }]);
 
-    // Output: 24
-    Qh.console.log(Qh.mult(2, Q.when(3), Q.when(4)));
+// Output: 24
+Qh.console.log(Qh.mult(2, Q.when(3), Q.when(4)));
 
-    // Output: Bar
-    Qh.ifElse(Qh.and(1, 2, 0, 3)).then(
-        () => console.log('Foo'),
-        () => console.log('Bar')
-    );
+// Output: Bar
+Qh.ifElse(Qh.and(1, 2, 0, 3)).then(
+    () => console.log('Foo'),
+    () => console.log('Bar')
+);
+```
 
 ## License
 
