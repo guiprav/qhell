@@ -1,6 +1,6 @@
 {
   "name": "qhell",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Helpers for treating promises more like the values they resolve to",
   "author": "Guilherme Prá Vieira (super.driver.512@gmail.com)",
   "license": "AGPL-3.0+",
