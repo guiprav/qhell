@@ -1,0 +1,21 @@
+{
+  "name": "qq",
+  "version": "1.0.0",
+  "description": "Helpers for treating promises more like the values they resolve to",
+  "author": "Guilherme Prá Vieira (super.driver.512@gmail.com)",
+  "license": "AGPL-3.0+",
+  "homepage": "https://github.com/n2liquid/qq#readme",
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n2liquid/qq.git"
+  },
+  "bugs": {
+    "url": "https://github.com/n2liquid/qq/issues"
+  },
+  "dependencies": {
+    "q": "^1.4.1"
+  }
+}
