@@ -22,31 +22,92 @@ let objProtoToString = x => Object.prototype.toString.call(x);
 
 let isArguments = x => objProtoToString(x) === '[object Arguments]';
 
+let isRawValue = x => (
+    !Array.isArray(x)
+    // TODO: Do proper object detection.
+    && !(x instanceof Object)
+    && !Q.isPromiseAlike(x)
+);
+
 Qh.deepWhen = x => {
     if(isArguments(x)) {
         x = Array.from(x);
     }
 
-    // TODO: This can be made much more efficient if we avoid
-    // calling Q.when / Q.all on non-promises.
     return Q.when(x).then(x => {
         if(Array.isArray(x)) {
             let nx = [];
 
             return Q.all(x).then(xs => {
-                return Q.all(xs.map(x => Qh.deepWhen(x)));
+                let deferred = Q.defer();
+
+                let pending = 0;
+
+                xs.forEach((x, i) => {
+                    if(isRawValue(x)) {
+                        nx[i] = x;
+                    }
+                    else {
+                        ++pending;
+
+                        Qh.deepWhen(x).then(x => {
+                            nx[i] = x;
+                            --pending;
+
+                            if(pending === 0) {
+                                deferred.resolve(nx);
+                            }
+                        }, err => {
+                            deferred.reject(err);
+                        });
+                    }
+                });
+
+                if(pending === 0) {
+                    deferred.resolve(nx);
+                }
+
+                return deferred.promise;
             });
         }
 
         // TODO: Do proper object detection.
         if(x instanceof Object) {
+            // TODO: Try to reuse some of the code from similar
+            // array handling above.
             let nx = {};
 
-            return Q.all(Object.keys(x).map(k => {
-                return Qh.deepWhen(x[k]).then(v => {
+            let deferred = Q.defer();
+
+            let pending = 0;
+
+            Object.keys(x).forEach(k => {
+                let v = x[k];
+
+                if(isRawValue(v)) {
                     nx[k] = v;
-                });
-            })).then(() => nx);
+                }
+                else {
+                    ++pending;
+
+                    Qh.deepWhen(v).then(v => {
+                        nx[k] = v;
+                        --pending;
+
+                        if(pending === 0) {
+                            deferred.resolve(nx);
+                        }
+                    }, err => {
+                        deferred.reject(err);
+                    });
+                }
+            });
+
+            if(pending === 0) {
+                deferred.resolve(nx);
+            }
+
+            return deferred.promise;
         }
 
         return x;
