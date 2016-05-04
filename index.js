@@ -35,6 +35,10 @@ Qh.deepWhen = x => {
     }
 
     return Q.when(x).then(x => {
+        if(isArguments(x)) {
+            x = Array.from(x);
+        }
+
         if(Array.isArray(x)) {
             let nx = [];
 
