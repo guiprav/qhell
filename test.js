@@ -210,6 +210,58 @@ describe('deepWhen', () => {
         });
     });
 
+    describe('called with an arguments object as parameter', () => {
+        describe('containing a single value', () => {
+            describe('that is not a promise', () => {
+                it('should return promise to an equivalent array', done => {
+                    (function() {
+                        Qh.deepWhen(arguments).then(result => {
+                            result.should.deep.equal([123]);
+                            done();
+                        }).done();
+                    })(123);
+                });
+            });
+
+            describe('that is a promise', () => {
+                it('should return promise to an equivalent, fully-resolved array', done => {
+                    (function() {
+                        Qh.deepWhen(arguments).then(result => {
+                            result.should.deep.equal([123]);
+                            done();
+                        }).done();
+                    })(Q.when(123));
+                });
+            });
+        });
+    });
+
+    describe('called with a promise to an arguments object as parameter', () => {
+        describe('where the array contains a single parameter', () => {
+            describe('that is not a promise', () => {
+                it('should return promise to an equivalent array', done => {
+                    (function() {
+                        Qh.deepWhen(Q.when(arguments)).then(result => {
+                            result.should.deep.equal([123]);
+                            done();
+                        }).done();
+                    })(123);
+                });
+            });
+
+            describe('that is a promise', () => {
+                it('should return promise to an equivalent, fully-resolved array', done => {
+                    (function() {
+                        Qh.deepWhen(Q.when(arguments)).then(result => {
+                            result.should.deep.equal([123]);
+                            done();
+                        }).done();
+                    })(Q.when(123));
+                });
+            });
+        });
+    });
+
     describe('called with an object as parameter', () => {
         describe('containing a single property', () => {
             describe('whose value is not a promise', () => {
