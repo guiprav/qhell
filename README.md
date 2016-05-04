@@ -2,8 +2,6 @@
 
 Helpers for treating promises more like the values they resolve to.
 
-[Even a bunch of poor-man tests](test.js) can be worth a thousand words.
-
 ## Installation
 
     npm install --save qhell
