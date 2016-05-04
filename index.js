@@ -39,7 +39,7 @@ Qh.deepWhen = x => {
         }
 
         // TODO: Do proper object detection.
-        if(typeof x === 'object') {
+        if(x instanceof Object) {
             let nx = {};
 
             return Q.all(Object.keys(x).map(k => {
