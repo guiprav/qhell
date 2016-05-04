@@ -5,6 +5,9 @@
   "author": "Guilherme Prá Vieira (super.driver.512@gmail.com)",
   "license": "AGPL-3.0+",
   "homepage": "https://github.com/n2liquid/qhell#readme",
+  "scripts": {
+    "test": "mocha test.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/n2liquid/qhell.git"
