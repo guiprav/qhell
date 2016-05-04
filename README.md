@@ -9,8 +9,15 @@ Helpers for treating promises more like the values they resolve to.
 ## Examples
 
 ```js
+let util = require('util');
+
 let Qh = require('qhell');
 let Q = require('q');
+
+// Output: [1, 2, { a: 3, b: [4, { c: 5 }] }]
+Qh.deepWhen([1, Q.when(2), { a: 3, b: Q.when([4, { c: Q.when(5) }]) }]).then(
+    result => console.log(util.inspect(result, { depth: null })
+);
 
 // Output: 1 2 [ 3, 4, { a: 5, b: 6 } ]
 Qh.console.log(1, 2, [3, Q.when(4), { a: 5, b: Q.when(6) }]);
