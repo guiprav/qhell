@@ -24,8 +24,8 @@ let isArguments = x => objProtoToString(x) === '[object Arguments]';
 
 let isRawValue = x => (
     !Array.isArray(x)
-    // TODO: Do proper object detection.
-    && !(x instanceof Object)
+    // TODO: Write tests for this condition.
+    && (x.constructor !== Object)
     && !Q.isPromiseAlike(x)
 );
 
@@ -75,8 +75,8 @@ Qh.deepWhen = x => {
             });
         }
 
-        // TODO: Do proper object detection.
-        if(x instanceof Object) {
+        // TODO: Write tests for this conditional.
+        if(x.constructor === Object) {
             // TODO: Try to reuse some of the code from similar
             // array handling above.
             let nx = {};
